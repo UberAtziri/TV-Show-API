@@ -9,6 +9,8 @@ namespace WebApi.MappingProfile
         public TVShowMappings()
         {
             CreateMap<TVShowEntity, TVShowCreateDto>().ReverseMap();
+            CreateMap<TVShowEntity, TVShowResponse>().ReverseMap();
+            CreateMap<TVShowGenre, TVShowGenreResponse>().ReverseMap();
         }
     }
 }

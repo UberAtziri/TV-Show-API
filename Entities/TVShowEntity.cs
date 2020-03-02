@@ -1,10 +1,14 @@
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 namespace WebApi.Entities
 {
-    public class TVShowEntity : IEntity
+    public class TVShowEntity
     {
-        public int Id { get; set; }
+        [Key]
+        public int TVShowId { get; set; }
         public string Title { get; set; }
-        public string Genre { get; set; }
         public double ImdbScore { get; set; }
+        public ICollection<TVShowGenre> TVShowGenre { get; set; }
     }
 }
