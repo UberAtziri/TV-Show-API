@@ -2,19 +2,24 @@ using WebApi.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApi.Repositories
 {
-    public class TVShowSqlRepository : IRepository
+    public class TVShowSqlRepository : ITVShowRepo
     {
         private readonly TVShowDbContext _context;
-        public TVShowSqlRepository(TVShowDbContext context)
+        private readonly Random _random;
+        private readonly ITVShowGenres _tvgenre;
+        public TVShowSqlRepository(TVShowDbContext context, ITVShowGenres tvgenres )
         {
             _context = context;
+            _random = new Random();
+            _tvgenre = tvgenres;
         }
         public TVShowEntity GetSingle(int id)
         {
-            return _context.TVShowItems.FirstOrDefault(x => x.Id == id);
+            return _context.TVShowItems.Include(x=>x.TVShowGenre).ThenInclude(c=>c.Genre).FirstOrDefault(x => x.TVShowId == id);
         }
         public void Add(TVShowEntity item)
         {
@@ -34,7 +39,8 @@ namespace WebApi.Repositories
         }
         public IQueryable<TVShowEntity> GetAll()
         {
-            return _context.TVShowItems.AsQueryable();
+            
+            return _context.TVShowItems.Include(x=>x.TVShowGenre).ThenInclude(g=>g.Genre).AsQueryable();
         }
 
         public int Count()
@@ -48,10 +54,16 @@ namespace WebApi.Repositories
         }        
         public TVShowEntity GetRandomTVShowByGenre(string genre)
         {
-            return _context.TVShowItems
-                .Where(x => x.Genre.ToLower() == genre.ToLower())
-                .OrderBy(o => Guid.NewGuid())
-                .FirstOrDefault();
+            List<TVShowGenre> temp = _tvgenre.GetByGenre(genre);
+            var randomTVShow = temp[_random.Next(temp.Count())];
+
+                
+            return GetTVShowByTitle(randomTVShow.TVShow.Title);      
+        }
+
+        public TVShowEntity GetTVShowByTitle(string title)
+        {
+            return _context.TVShowItems.FirstOrDefault(x=>x.Title.ToLower() == title.ToLower());
         }
     }
 }
