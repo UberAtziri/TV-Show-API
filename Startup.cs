@@ -17,6 +17,7 @@ using Microsoft.OpenApi.Models;
 using WebApi.MappingProfile;
 using AutoMapper;
 using WebApi.Entities;
+using WebApi.Interfaces;
 
 namespace WebApi
 {
@@ -34,7 +35,7 @@ namespace WebApi
         {
             services.AddDbContext<TVShowDbContext>(options => options.UseInMemoryDatabase(databaseName: "TVShows"));
             services.AddSingleton<ISeed, Seed>();
-            services.AddScoped<ITVShowRepo, TVShowSqlRepository>();
+            services.AddScoped<ITVShowRepo, TVShowSqlRepo>();
             services.AddScoped<IGenreRepo, GenreSqlRepo>();
             services.AddScoped<ITVShowGenres, TVShowGenreSqlRepo>();
             services.AddControllers().AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

@@ -1,5 +1,6 @@
 using System.Linq;
 using WebApi.Entities;
+using WebApi.Interfaces;
 
 namespace WebApi.Repositories
 {
@@ -51,6 +52,12 @@ namespace WebApi.Repositories
         {
             _context.GenreItems.Update(item);
             return item;
+        }
+        public bool isGenreExist(string genre)
+        {
+            var item = _context.GenreItems.FirstOrDefault(x=>x.Genre.ToLower() == genre.ToLower());
+            if(item == null) return false;
+            return true;
         }
     }
 }

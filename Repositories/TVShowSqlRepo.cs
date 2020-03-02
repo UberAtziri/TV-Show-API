@@ -3,15 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using WebApi.Interfaces;
 
 namespace WebApi.Repositories
 {
-    public class TVShowSqlRepository : ITVShowRepo
+    public class TVShowSqlRepo : ITVShowRepo
     {
         private readonly TVShowDbContext _context;
         private readonly Random _random;
         private readonly ITVShowGenres _tvgenre;
-        public TVShowSqlRepository(TVShowDbContext context, ITVShowGenres tvgenres )
+        public TVShowSqlRepo(TVShowDbContext context, ITVShowGenres tvgenres )
         {
             _context = context;
             _random = new Random();

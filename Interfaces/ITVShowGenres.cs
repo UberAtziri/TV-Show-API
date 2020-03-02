@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WebApi.Entities;
 
-namespace WebApi.Repositories
+namespace WebApi.Interfaces
 {
     public interface ITVShowGenres
     {

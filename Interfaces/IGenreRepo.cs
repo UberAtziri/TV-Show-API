@@ -1,7 +1,7 @@
 using System.Linq;
 using WebApi.Entities;
 
-namespace WebApi.Repositories
+namespace WebApi.Interfaces
 {
     public interface IGenreRepo
     {
@@ -10,10 +10,10 @@ namespace WebApi.Repositories
          void Delete(int id);
          GenreEntity Update(int id, GenreEntity item);
          IQueryable<GenreEntity> GetAll();
-        //  GenreEntity GetRandomTVShowByGenre(string genre);
          int Count();
          bool Save();
          GenreEntity GetGenreEntityByGenre(string genre);
+         bool isGenreExist(string genre);
 
     }
 }
