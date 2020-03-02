@@ -10,6 +10,7 @@ using WebApi.Entities;
 using WebApi.Repositories;
 using AutoMapper;
 using WebApi.DTO;
+using WebApi.Interfaces;
 
 namespace WebApi.Controllers
 {

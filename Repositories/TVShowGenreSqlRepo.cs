@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WebApi.Entities;
 using Microsoft.EntityFrameworkCore;
+using WebApi.Interfaces;
 
 namespace WebApi.Repositories
 {
@@ -42,7 +43,7 @@ namespace WebApi.Repositories
 
         List<TVShowGenre> ITVShowGenres.GetByTVShow(string title)
         {
-            return _context.TVShowGenreItems.Where(x=>x.TVShow.Title == title).Include(x=>x.Genre).Include(x=>x.TVShow).ToList();
+            return _context.TVShowGenreItems.Where(x=>x.TVShow.Title.ToLower() == title.ToLower()).Include(x=>x.Genre).Include(x=>x.TVShow).ToList();
         }
 
         public List<TVShowGenre> GetByGenre(string genre)

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebApi.DTO;
 using WebApi.Entities;
 using WebApi.Repositories;
+using WebApi.Interfaces;
 
 namespace WebApi.Controllers
 {

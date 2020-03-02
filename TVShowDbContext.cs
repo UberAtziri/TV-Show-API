@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApi.Entities;
 
-namespace WebApi.Repositories
+namespace WebApi
 {
     public class TVShowDbContext : DbContext
     {
